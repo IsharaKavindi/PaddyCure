@@ -707,7 +707,7 @@ body {
         </a>
         <a class="btn-ghost" href="./pages/auth/login.php">Already have an account? Sign in</a>
       <?php else: ?>
-        <button class="btn-primary-green" href="./pages/reservations/reservations.php">
+        <button class="btn-primary-green"  onclick="window.location.href='http://127.0.0.1:5000'">
           Upload Your Image
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
 			</button>
@@ -828,7 +828,7 @@ body {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   <?php else: ?>
-    <button class="btn-dark" href="./pages/reservations/reservations.php">
+    <button class="btn-dark"  onclick="window.location.href='http://127.0.0.1:5000'">
       Scan a Leaf Now
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
 	</button>
