@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="input-container">
                     <label for="email">Email *</label>
-                    <input type="email" name="email" id="email" placeholder="johndoe@example.com" required />
+                    <input type="email" name="email" id="email" placeholder="Kamal@gamil.com" required />
                     <span class="error-message"><?php echo $email_error ?></span>
                 </div>
 
@@ -96,12 +96,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="password">Password *</label>
                     <input type="password" name="password" id="password" placeholder="MySuperSecretPassword" required />
                     <span class="error-message"><?php echo $password_error ?></span>
-                    <div class="forget-password-link-container"><a href="./forgot-password.php">Did you forget your password?</a></div>
+                    <!-- <div class="forget-password-link-container"><a href="./forgot-password.php">Did you forget your password?</a></div> -->
                 </div>
 
                 <div class="login-form-actions-container">
                     <button class="btn-primary" type="submit">Log In</button>
-                    <p class="accept-terms-text">By continuing, you agree to our <a href="../terms_of_service.php">Terms of Service</a> and <a href="../privacy-policy.php">Privacy Policy</a>.</p>
                     <div class="create-account-link-container"><a href="./register.php">Not a member? Then, join with us.</a></div>
                 </div>
             </form>

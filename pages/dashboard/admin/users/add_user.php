@@ -12,7 +12,7 @@ $user_role_error = $first_name_error = $last_name_error = $email_error = $contac
 
 $is_error = false;
 
-$roles = array('ADMIN', 'CUSTOMER', 'STAFF');
+$roles = array('ADMIN', 'USER');
 
 function sanitize_input($data)
 {
@@ -120,8 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <select type="text" name="user_role" id="user_role" placeholder="Select the no of people" required onchange="getReservationTimeSlots()" value="<?php echo $user_role; ?>">
                                 <option value="" selected disabled hidden>Select the user role</option>
                                 <option value="ADMIN">Administrator</option>
-                                <option value="STAFF">Staff</option>
-                                <option value="CUSTOMER">Customer</option>
+                                <option value="USER">User</option>
                             </select>
                             <span class="error-message"><?php echo $user_role_error; ?></span>
                         </div>

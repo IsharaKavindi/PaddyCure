@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="input-container">
                     <label for="email">Email *</label>
-                    <input type="email" name="email" id="email" placeholder="johndoe@example.com" required />
+                    <input type="email" name="email" id="email" placeholder="kamal@gmail.com" required />
                     <span class="error-message"><?php echo $email_error; ?></span>
                 </div>
 
@@ -146,7 +146,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="register-form-actions-container">
                     <button class="btn-primary form-submit-btn" type="submit">Create Account</button>
-                    <p class="accept-terms-text">By continuing, you agree to our <a href="../terms_of_service.php">Terms of Service</a> and <a href="../privacy-policy.php">Privacy Policy</a>.</p>
                     <div class="create-account-link-container"><a href="./login.php">Already a member? Then, login to your account.</a></div>
                 </div>
             </form>

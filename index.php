@@ -631,6 +631,35 @@ body {
 }
 .btn-dark:hover { background: var(--forest); transform: translateY(-2px); }
 
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1.5px solid var(--lime);
+    color: var(--lime);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.view-all-btn:hover {
+    background: var(--lime);
+    color: var(--deep);
+    transform: translateY(-2px);
+}
+.view-all-btn svg {
+    transition: transform 0.2s;
+}
+.view-all-btn:hover svg {
+    transform: translateX(4px);
+}
+
 /* ═══════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════ */
@@ -779,9 +808,6 @@ body {
       <p class="section-label">Coverage</p>
       <h2 class="section-title">Diseases We <em>Detect</em></h2>
     </div>
-    <p class="section-desc">
-      Trained on thousands of field images across Sri Lanka and South Asia, our model recognises the most common and devastating paddy diseases with high precision.
-    </p>
   </div>
 
   <div class="disease-cards">
@@ -813,6 +839,12 @@ body {
       <p class="disease-desc">Transmitted by green leafhoppers. Causes yellowing and stunting. Early detection is key to preventing spread.</p>
     </div>
   </div>
+<div  href="<?php echo BASE_URL; ?>/index.php" style="text-align:center; margin-top: 48px;">
+    <a href="<?= BASE_URL ?>/pages/diseases.php" class="view-all-btn">
+        View All Diseases
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+</div>
 </section>
 
 <!-- ═══ CTA ═══ -->
@@ -831,7 +863,7 @@ body {
     <button class="btn-dark"  onclick="window.location.href='http://127.0.0.1:5000'">
       Scan a Leaf Now
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
-	</button>
+	  </button>
   <?php endif; ?>
 </section>
 

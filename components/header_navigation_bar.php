@@ -27,13 +27,16 @@ function isActivePage($url)
 		<li class="<?php echo isActivePage('/index.php') ?>">
 			<a href="<?php echo BASE_URL; ?>/index.php">Home</a>
 		</li>
+		<li class="<?php echo isActivePage('/pages/community/community.php') ?>">
+			<a href="<?php echo BASE_URL; ?>//pages/community/community.php">Community</a>
+		</li>
 		<li class="<?php echo isActivePage('/pages/articles/articles.php') ?>">
 			<a href="<?php echo BASE_URL; ?>//pages/articles/articles.php">Articles</a>
 		</li>
 		<li class="<?php echo isActivePage('/pages/contact/contact.php') ?>">
 			<a href="<?php echo BASE_URL; ?>/pages/contact/contact.php">Contact Us</a>
 		</li>
-		<?php if (isset($_SESSION['role']) && ($_SESSION['role'] != 'CUSTOMER')) : ?>
+		<?php if (isset($_SESSION['role']) && ($_SESSION['role'] != 'USER')) : ?>
 			<li class="<?php echo isActivePage('/pages/dashboard/' . strtolower($_SESSION['role']) . '/' . strtolower($_SESSION['role']) . '_dashboard.php') ?>">
 				<a href="<?php echo BASE_URL; ?>/pages/dashboard/<?= strtolower($_SESSION['role']) ?>/<?= strtolower($_SESSION['role']) ?>_dashboard.php"><?= ucwords(strtolower($_SESSION['role'])) ?> Dashboard</a>
 			</li>
