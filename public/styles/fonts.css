@@ -1,0 +1,61 @@
+@font-face {
+	font-family: 'Poppins';
+	src: url('../fonts/Poppins-Light.woff2');
+	font-weight: 300;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('../fonts/Poppins-Regular.woff2');
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('../fonts/Poppins-Medium.woff2');
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('../fonts/Poppins-SemiBold.woff2');
+	font-weight: 600;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('../fonts/Poppins-Bold.woff2');
+	font-weight: 700;
+	font-display: swap;
+}
+
+/* ? MATERIAL ICONS CONFIG */
+@font-face {
+	font-family: 'Material Symbols Rounded';
+	src: url('../fonts/material-symbols-rounded.woff2');
+}
+
+.material-symbols-rounded {
+	font-family: 'Material Symbols Rounded';
+	font-weight: normal;
+	font-style: normal;
+	display: inline-block;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: 'liga';
+	font-size: inherit;
+}
+
+.material-symbols-rounded-filled {
+	font-family: 'Material Symbols Rounded';
+	font-variation-settings: 'FILL' 1;
+}

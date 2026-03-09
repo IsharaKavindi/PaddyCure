@@ -1,0 +1,82 @@
+:is(.special-events, .promotions) {
+	padding: 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+:is(.special-events, .promotions) > :is(.special-events-info, .promotions-info) {
+	padding: 0 3rem;
+}
+
+:is(.special-events, .promotions) > :is(.special-events-info, .promotions-info) > h1 {
+	text-align: center;
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+:is(.special-events, .promotions) > :is(.special-events-info, .promotions-info) > p {
+	text-align: center;
+	font-size: 1.15rem;
+}
+
+.events-container,
+.promotions-container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+	gap: 2rem;
+}
+
+.promotion,
+.event {
+	background-color: var(--secondary-background-color);
+	border-radius: 0.5rem;
+	margin: 20px auto;
+	padding: 20px;
+	width: 100%;
+}
+
+.promotion > .promotion-icon-and-discount {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.promotion > .promotion-icon-and-discount > .promotion-icon {
+	margin-bottom: 0;
+}
+
+.promotion > .promotion-icon-and-discount > .promotion-discount {
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+:is(.event-icon, .promotion-icon).material-symbols-rounded {
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+:is(.event-name, .promotion-name) {
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.promotion-duration {
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.event-duration {
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+}
+
+:is(.event-duration, .promotion-duration) > .material-symbols-rounded {
+	font-size: 1.5rem;
+	margin-right: 0.5rem;
+	font-weight: 500;
+}

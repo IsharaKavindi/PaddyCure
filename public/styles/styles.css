@@ -1,0 +1,263 @@
+/* ? Imported because it's used in multiple places */
+@import url('./variables.css');
+@import url('./footer.css');
+
+/* ? COMPONENT SPECIFIC IMPORTS */
+@import url('./navbar.css');
+@import url('./buttons.css');
+
+/* :root {
+	font-size: 16px;
+} */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', 'Inter', sans-serif;
+	font-weight: 400;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	min-height: 100vh;
+	position: relative;
+	background-color: var(--primary-background-color, #fff);
+	color: var(--primary-font-color, #000);
+	/* overflow-x: hidden; */
+}
+
+main {
+	max-width: 100rem;
+	height: fit-content;
+	min-height: 60vh;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+a {
+	color: var(--primary-font-color);
+}
+
+li:has(> a) {
+	list-style-type: none;
+}
+
+li > a {
+	text-decoration: none;
+}
+
+li > a:hover {
+	text-decoration: underline;
+}
+
+.hero-text-container > .join-us-btn {
+	margin-top: 1rem;
+}
+
+.model-container {
+	padding: 2.5rem;
+	display: flex;
+	gap: 4rem;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.model {
+	width: 100%;
+	min-height: 30rem;
+	max-width: 80rem;
+	border-radius: 1rem;
+}
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+}
+
+.input-group-container {
+	display: grid;
+	grid-auto-flow: column dense;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.input-group-container > .input-container {
+	margin-bottom: 0;
+}
+
+.input-group-container:has(input[type='file']) {
+	display: flex;
+	gap: 2rem;
+}
+
+.input-group-container:has(input[type='file']) img {
+	width: 10rem;
+	border-radius: 1rem;
+	border: 2px solid hsla(0, 0%, 80%, 0.5);
+}
+
+.input-group-container:has(input[type='file']) .input-container {
+	flex-grow: 1;
+}
+
+.input-container > label {
+	font-weight: 500;
+	margin-bottom: 0.5rem;
+}
+
+.input-container > :is(input, select, textarea) {
+	padding: 0.75rem 1rem;
+	border-radius: 0.5rem;
+	border: 3px solid var(--secondary-background-color);
+	background-color: hsla(228, 33%, 97%, 0.5);
+	backdrop-filter: blur(0.75);
+	transition: border-color 0.2s ease-in-out;
+	outline: none;
+}
+
+:is(.input-container, .search-input-container) > :is(input, select, textarea):focus {
+	border-color: var(--primary-font-color);
+}
+
+.input-container > textarea {
+	min-height: 10rem;
+	resize: vertical;
+}
+
+.input-container > .error-message {
+	color: red;
+	margin-top: 0.25rem;
+	font-size: 0.75rem;
+}
+
+.input-container > small {
+	font-size: 0.75rem;
+	margin-top: 0.5rem;
+	color: hsl(0, 0%, 25%);
+}
+
+:is(input, select):has(+ .error-message:not(:empty)) {
+	border: 2px solid red;
+}
+
+input[type='search'] {
+	background-color: var(--secondary-background-color);
+	border: 3px solid var(--secondary-background-color);
+	outline: none;
+	padding: 0.75rem 1rem;
+	border-radius: 5rem;
+	min-width: 15rem;
+	transition: border-color 0.2s ease-in-out;
+}
+
+.search-input-container {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+/* ? TABLES */
+table {
+	width: 100%;
+	table-layout: auto;
+	border-radius: 1rem;
+	padding: 1rem;
+	border-collapse: collapse;
+	/* table-layout: fixed; */
+	/* border: 1px solid #000; */
+	/* overflow: hidden; */
+}
+
+table * {
+	transition: background 0.25s ease-in-out;
+}
+
+table :is(td, th) {
+	/* to fix table cell collapse issues when having flex cells */
+	/* Fix by Håkan Save Hansson. https://codepen.io/savehansson/pen/DmxyEP */
+	/* box-shadow: 1px 0 0 0 #000, 0 1px 0 0 #000, 1px 1px 0 0 #000, 1px 0 0 0 #000 inset, 0 1px 0 0 #000 inset; */
+	padding: 1rem;
+	width: fit-content;
+	text-align: center;
+}
+
+table > thead > tr {
+	background-color: var(--primary-font-color);
+	color: var(--secondary-font-color);
+	height: 3rem;
+}
+
+table > tbody > tr {
+	background-color: var(--primary-background-color);
+}
+
+table > tbody > tr:hover {
+	background-color: var(--primary-highlight-color) !important;
+}
+
+table > tbody > tr:nth-child(even) {
+	background-color: var(--secondary-background-color);
+}
+
+td > .actions-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+td.no-results {
+	text-align: center;
+	padding: 5rem !important;
+	background-color: var(--secondary-background-color) !important;
+}
+
+hr {
+	margin: 2rem 0;
+	border: 1px solid hsla(0, 0%, 80%, 0.25);
+}
+
+.alert {
+	background-color: var(--primary-highlight-color);
+	color: var(--primary-font-color);
+	padding: 1rem;
+	margin-bottom: 2rem;
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.alert > .alert-heading {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.alert-heading h4 {
+	font-weight: 600;
+	padding: 0.25rem 0;
+}
+
+.alert > .alert-heading > span.material-symbols-rounded {
+	font-size: 1.5rem;
+}
+
+.alert > .alert-content {
+	margin-top: 0.5rem;
+	/* padding-left: 2rem; */
+}
+
+.alert-content > .alert-text {
+	font-size: 0.8rem;
+}
+
+.alert-content > .btn-secondary {
+	margin-top: 1rem;
+}

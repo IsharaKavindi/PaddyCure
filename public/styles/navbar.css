@@ -1,0 +1,130 @@
+nav.navbar {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	height: 6rem;
+	/* border: 1px solid black; */
+	position: sticky;
+	top: 0;
+	background-color: var(--primary-background-color);
+	z-index: 5;
+	padding: 0 0.5rem;
+	/* transition: background-color 0.5s ease; */
+}
+
+nav.navbar.blurred-background {
+	background-color: hsla(31, 41%, 90%, 0.5);
+	backdrop-filter: blur(1rem);
+	-webkit-backdrop-filter: blur(1rem);
+}
+
+.logo-container {
+	width: 3cm;
+}
+
+.logo-container > img {
+	width: 12px;
+	padding: 0.75rem;
+}
+
+.logo-container > h1 {
+	font-weight: 500;
+	text-transform: uppercase;
+	color: var(--primary-font-color);
+}
+
+.logo-container > h1:hover {
+	text-decoration: underline;
+}
+
+.nav-links {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0 1rem;
+}
+
+.nav-links > li {
+	list-style-type: none;
+	height: fit-content;
+}
+
+.nav-links > li:has(> a.login-register-btn) {
+	background-color: var(--secondary-highlight-color, #000);
+	color: var(--secondary-font-color, #fff);
+	padding: 0.25rem 0.5rem;
+	border-radius: 5rem;
+}
+
+.nav-links > li > a.login-register-btn {
+	text-align: center;
+}
+
+.nav-links > li > a.login-register-btn:hover {
+	border-color: transparent;
+}
+
+.nav-links > li:has(> a.logged-user-btn) {
+	background-color: var(--primary-background-color) !important;
+	border-radius: 5rem;
+}
+
+.nav-links > li > a.logged-user-btn:hover {
+	text-decoration: none;
+	border-color: transparent;
+}
+
+.nav-links > li:hover {
+	border-bottom-color: black;
+}
+
+.nav-links > li > a {
+	border-bottom: 2px solid transparent;
+	text-decoration: none !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.25rem 0.75rem;
+	text-decoration: none;
+	font-weight: 500;
+	color: inherit;
+	height: fit-content;
+	transition: border 0.2s ease-in-out;
+}
+
+.nav-links > li.active > a {
+	border-color: black;
+}
+
+.nav-links > li > a:hover {
+	border-color: black;
+}
+
+.nav-links > li > a > .material-symbols-rounded {
+	font-size: 1.4rem;
+}
+
+.nav-links > li > a:hover > .material-symbols-rounded {
+	font-size: 1.4rem;
+	font-variation-settings: 'FILL' 1;
+}
+
+.nav-links .cart-btn {
+	position: relative;
+	gap: 0.15rem;
+}
+
+.nav-links .cart-btn .cart-items-count {
+	/* position: absolute;
+	top: 0;
+	right: 0; */
+	background-color: var(--primary-font-color);
+	color: var(--secondary-font-color);
+	padding: 0.5rem;
+	border-radius: 10rem;
+	height: fit-content;
+	line-height: 0.4;
+	font-size: 0.75rem;
+}

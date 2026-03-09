@@ -1,0 +1,114 @@
+.profile-model {
+	background-color: var(--primary-highlight-color);
+	min-height: 10rem;
+	padding: 2rem;
+	border: none;
+	border-radius: 1rem;
+	margin-bottom: 2rem;
+}
+
+.profile-header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.profile-header > h2 {
+	font-size: 2.5rem;
+	font-weight: 600;
+}
+
+.profile-actions-container {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.profile-info {
+	/* display: flex; */
+}
+
+.profile-info > p {
+	display: flex;
+	align-items: center;
+	font-size: 1rem;
+	color: var(--primary-font-color);
+	margin-top: 0.5rem;
+}
+
+.profile-info > p > .material-symbols-rounded-filled {
+	font-size: 1.5rem;
+	padding: 0 0.5rem 0 0;
+}
+
+section > h2 {
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+}
+
+.orders-container,
+.reservations-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-bottom: 5rem;
+}
+
+:is(.orders, .reservations) {
+	border-collapse: collapse;
+}
+
+:is(.orders, .reservations) :is(td, th) {
+	/* to fix table cell collapse issues when having flex cells */
+	/* Fix by Håkan Save Hansson. https://codepen.io/savehansson/pen/DmxyEP */
+	/* box-shadow: 1px 0 0 0 #000, 0 1px 0 0 #000, 1px 1px 0 0 #000, 1px 0 0 0 #000 inset, 0 1px 0 0 #000 inset; */
+	padding: 0.5rem 1rem;
+}
+
+.orders :is(td, th).order-price {
+	text-align: right;
+}
+
+.order,
+.reservation {
+	background-color: var(--primary-background-color);
+	text-align: center;
+}
+
+.order > td.order-id {
+	width: 10%;
+}
+
+.order > td.order-status {
+	width: 10%;
+}
+
+.order > td.order-items {
+	text-align: left;
+}
+
+.order > td.order-price {
+	width: 10%;
+}
+
+.order > td.order-date {
+	width: 10%;
+}
+
+.reservation > td.reservation-id {
+	width: 10%;
+}
+
+.reservation > td.reservation-pre-order-items {
+	width: 60%;
+	text-align: left;
+}
+
+.reservation > td.reservation_table_id {
+	width: 10%;
+}
+
+.reservation > td.reservation-date {
+	width: 20%;
+}

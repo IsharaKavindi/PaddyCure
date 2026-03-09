@@ -1,0 +1,114 @@
+.login-model,
+.register-model {
+	width: 100%;
+	max-width: 40rem;
+	display: flex;
+	justify-content: center;
+	border-color: transparent;
+	background-color: hsla(0, 0%, 100%, 0.5);
+	backdrop-filter: blur(5px);
+}
+
+.login-model {
+	max-width: 35rem !important;
+}
+
+:is(.login-model, .register-model) > * {
+	padding: 0 2rem;
+	flex-grow: 1;
+}
+
+.user-account-benefits-container > img {
+	width: 8rem;
+}
+
+.user-account-benefits-container > .user-account-benefits-title {
+	font-weight: 600;
+	text-wrap: balance;
+	margin-top: 1rem;
+}
+
+.user-account-benefits-container > .user-account-benefits {
+	padding: 1rem 2rem;
+}
+
+:is(.login-form-actions-container, .register-form-actions-container) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+:is(.login-form-actions-container, .register-form-actions-container) > button[type='submit'] {
+	margin-top: 2rem;
+	min-width: 12.5rem;
+}
+:is(.login-form, .register-form) header {
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+:is(.login-form, .register-form) header > h1 {
+	font-size: 3rem;
+	font-weight: 600;
+}
+:is(.login-form, .register-form) header > p {
+	font-size: 0.9rem;
+	font-weight: 300;
+}
+
+.login-form > .input-container > .forget-password-link-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+:is(.forget-password-link-container, .create-account-link-container) > a {
+	font-size: 0.9rem;
+	font-weight: 500;
+	color: var(--primary-button-background-color);
+	text-decoration: none;
+	padding: 0.5rem 0;
+}
+:is(.forget-password-link-container, .create-account-link-container) > a:hover {
+	text-decoration: underline;
+}
+
+.create-account-link-container {
+	margin-top: 1rem;
+}
+
+.accept-terms-text {
+	margin-top: 1rem;
+	font-size: 0.75rem;
+}
+
+section.unauthorized {
+	width: 100%;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 5rem 2.5rem;
+}
+
+section.unauthorized > .unauthorized-icon {
+	font-size: 5rem;
+	/* color: var(--primary-highlight-color);
+	text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000,
+		-1px 1px #000; */
+}
+
+section.unauthorized > h1 {
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+section.unauthorized > p {
+	width: 50%;
+	text-align: center;
+}
+
+section.unauthorized > a {
+	margin-top: 1rem;
+}

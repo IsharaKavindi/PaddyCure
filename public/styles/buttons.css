@@ -1,0 +1,72 @@
+.btn-primary {
+	width: fit-content;
+	cursor: pointer;
+	background-color: var(--primary-button-background-color);
+	color: var(--primary-button-font-color, #000);
+	font-weight: 500;
+	font-size: 1rem;
+	padding: 1rem 2.5rem;
+	border-radius: 10rem;
+	transition: all 0.25s ease-in-out;
+	outline: none;
+	text-align: center;
+	border: 3px solid var(--primary-button-background-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.btn-primary:is(:hover, :focus, :active, :focus-within) {
+	color: var(--primary-font-color);
+	background-color: var(--primary-highlight-color);
+}
+
+a.btn-primary {
+	text-decoration: none;
+}
+
+.btn-secondary {
+	width: fit-content;
+	cursor: pointer;
+	background-color: var(--primary-button-background-color);
+	color: var(--primary-button-font-color, #000);
+	font-weight: 500;
+	font-size: 1rem;
+	padding: 0.5rem 2rem;
+	border-radius: 10rem;
+	transition: all 0.25s ease-in-out;
+	outline: none;
+	text-align: center;
+	border: 3px solid var(--primary-button-background-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+	color: var(--primary-font-color);
+	background-color: var(--primary-highlight-color);
+}
+
+a.btn-secondary {
+	text-decoration: none;
+}
+
+.btn-secondary > span.material-symbols-rounded.btn-icon {
+	font-size: 1.25rem;
+}
+
+.btn-only-icon {
+	width: 2rem;
+	padding: 0;
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+:is(.btn-primary, .btn-secondary).dark {
+	border-color: var(--primary-background-color);
+}

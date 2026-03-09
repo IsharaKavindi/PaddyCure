@@ -1,0 +1,118 @@
+.cart-info-container {
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+.cart-info-container > h1 {
+	width: 100%;
+	font-weight: 600;
+	font-size: 3rem;
+}
+
+.cart {
+	padding: 2rem;
+}
+
+.cart-table :is(thead > tr > th:first-child, tbody > tr > td:first-child) {
+	text-align: start;
+}
+
+.cart-table > thead th {
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+.cart-table > thead th:first-child {
+	width: 50%;
+}
+
+.cart-table .menu-item {
+	display: flex;
+	align-items: center;
+}
+
+.cart-table .menu-item > img {
+	width: 3rem;
+	aspect-ratio: 1/1;
+	object-fit: cover;
+	border: 1px solid #000;
+	border-radius: 0.25rem;
+	margin-right: 1rem;
+}
+
+.cart-table > tfoot {
+	background-color: var(--primary-font-color);
+	color: var(--secondary-font-color);
+}
+
+.cart-table > tfoot td {
+	font-weight: 600;
+	font-size: 1.25rem;
+	padding: 1rem;
+}
+
+tfoot td.total {
+	text-align: right;
+}
+
+tr.no-items-in-cart:hover {
+	background-color: transparent !important;
+}
+
+tr.no-items-in-cart > td {
+	text-align: center !important;
+	padding: 5rem 0;
+}
+
+tbody > tr {
+	transition: background 0.25s ease-in-out;
+}
+tbody > tr:hover {
+	background-color: var(--primary-highlight-color);
+}
+
+.cart > button {
+	margin-top: 2rem;
+	/* float: right; */
+}
+
+.cart-items-incrementing-actions-container {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	justify-content: end;
+}
+
+.cart-items-incrementing-actions-container > .btn-secondary {
+	width: 2rem !important;
+	height: 2rem !important;
+	padding: 0;
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.cart-items-incrementing-actions-container > .btn-secondary > .delete-icon {
+	font-weight: 300;
+	font-size: 1.25rem;
+}
+
+.cart-items-incrementing-actions-container > .selected-item-count {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 10rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border: 2px solid #000;
+	font-weight: 500;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.cart-actions-container {
+	display: flex;
+	justify-content: end;
+	margin-top: 2rem;
+}

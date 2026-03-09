@@ -1,0 +1,38 @@
+:is(.privacy-policy, .terms-of-service) {
+	padding: 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+}
+
+:is(.privacy-policy, .terms-of-service) > :is(.privacy-policy-info, .terms-of-service-info) {
+	padding: 0 3rem;
+}
+
+:is(.privacy-policy, .terms-of-service) > :is(.privacy-policy-info, .terms-of-service-info) > h1 {
+	text-align: center;
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+:is(.privacy-policy, .terms-of-service) > :is(.privacy-policy-info, .terms-of-service-info) > p {
+	text-align: center;
+	font-size: 1.15rem;
+}
+
+.policies,
+.terms {
+	padding: 0 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+:is(.policy, .term) > h3 {
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+:is(.policy, .term) > p {
+	margin-bottom: 0.5rem;
+}
