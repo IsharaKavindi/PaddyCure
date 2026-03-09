@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --green: #4ade80;
+        --green-dark: #16a34a;
+        --green-glow: rgba(74, 222, 128, 0.25);
+        --bg: #0a0f0a;
+        --card: #101810;
+        --border: rgba(74, 222, 128, 0.2);
+      }
+
+      body {
+        background: var(--bg);
+        color: #d4edda;
+        font-family: 'Source Sans 3', sans-serif;
+        min-height: 100vh;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Rajdhani', sans-serif;
+        letter-spacing: 0.05em;
+      }
+
+      .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--green);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        text-align: center;
+        margin-top: 2.5rem;
+        margin-bottom: 0.25rem;
+        text-shadow: 0 0 24px var(--green-glow);
+      }
+
+      .page-subtitle {
+        text-align: center;
+        color: #6b9e7a;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        margin-bottom: 2rem;
+      }
+
+      .pred-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 2rem;
+        max-width: 780px;
+        margin: 0 auto 3rem;
+        box-shadow: 0 0 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(74,222,128,0.08);
+      }
+
+      .pred-card h2 {
+        color: var(--green);
+        font-size: 1.4rem;
+        font-weight: 600;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        color: #a8c8b4;
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+
+      .form-control {
+        background: #0d160d;
+        border: 1px solid var(--border);
+        color: #d4edda;
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      .form-control:focus {
+        background: #0d160d;
+        border-color: var(--green);
+        box-shadow: 0 0 0 3px var(--green-glow);
+        color: #d4edda;
+        outline: none;
+      }
+
+      .btn-predict {
+        background: var(--green-dark);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.55rem 1.6rem;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: background 0.2s, box-shadow 0.2s;
+      }
+
+      .btn-predict:hover {
+        background: #15803d;
+        box-shadow: 0 0 14px var(--green-glow);
+        color: #fff;
+      }
+
+      .result-section {
+        background: #0c150c;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .result-section img {
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        max-height: 300px;
+        object-fit: contain;
+        width: 100%;
+        margin-bottom: 1.25rem;
+      }
+
+      .result-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .result-badge {
+        background: #112211;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
+        color: #a8c8b4;
+      }
+
+      .result-badge span {
+        color: var(--green);
+        font-weight: 600;
+      }
+
+      .btn-treatment {
+        background: transparent;
+        border: 2px solid var(--green);
+        color: var(--green);
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+      }
+
+      .btn-treatment:hover {
+        background: var(--green);
+        color: #0a0f0a;
+        box-shadow: 0 0 18px var(--green-glow);
+      }
+
+      /* Modal */
+      .modal-content {
+        background: #101c10;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        color: #d4edda;
+        box-shadow: 0 0 60px rgba(0,0,0,0.8);
+      }
+
+      .modal-header {
+        border-bottom: 1px solid var(--border);
+        padding: 1.2rem 1.5rem;
+      }
+
+      .modal-title {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--green);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .treatment-section {
+        margin-bottom: 1.25rem;
+      }
+
+      .treatment-section h6 {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--green);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .treatment-section p, .treatment-section li {
+        font-size: 0.9rem;
+        color: #a8c8b4;
+        line-height: 1.6;
+      }
+
+      .treatment-section ul {
+        padding-left: 1.2rem;
+      }
+
+      .treatment-section li + li {
+        margin-top: 0.3rem;
+      }
+
+      .severity-badge {
+        display: inline-block;
+        padding: 0.2rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-left: 0.5rem;
+      }
+
+      .severity-high   { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+      .severity-medium { background: rgba(234,179,8,0.15);  color: #facc15; border: 1px solid rgba(234,179,8,0.3); }
+      .severity-low    { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+
+      .btn-close {
+        filter: invert(1) sepia(1) saturate(2) hue-rotate(90deg) brightness(0.8);
+      }
+
+      .modal-footer {
+        border-top: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+      }
+
+      .btn-close-modal {
+        background: #1a2e1a;
+        border: 1px solid var(--border);
+        color: #a8c8b4;
+        border-radius: 8px;
+        padding: 0.45rem 1.2rem;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 0.95rem;
+        letter-spacing: 0.05em;
+        transition: background 0.2s;
+      }
+
+      .btn-close-modal:hover {
+        background: #223322;
+        color: var(--green);
+      }
+
+      .no-result-msg {
+        color: #ef4444;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <p class="page-title">Paddy Disease Prediction</p>
+    <p class="page-subtitle">Upload a leaf image to detect disease and get treatment guidance</p>
+
+    <div class="pred-card">
+      <h2>&#9675; Image Prediction</h2>
+
+      <form action="/" method="post" enctype="multipart/form-data">
+        <label for="fileInput" class="form-label">Choose an image file</label>
+        <input type="file" id="fileInput" name="file" accept=".jpg,.jpeg,.png" class="form-control mb-3">
+        <button type="submit" class="btn-predict">&#10148; Predict</button>
+
+        {% if message %}
+        <p class="no-result-msg mt-3">{{ message }}</p>
+        {% endif %}
+
+        {% if image_path %}
+        <div class="result-section">
+          <img src="{{ image_path }}" alt="Uploaded Image">
+
+          <div class="result-row">
+            <div class="result-badge">Actual Label: <span>{{ actual_label }}</span></div>
+            <div class="result-badge">Predicted: <span>{{ predicted_label }}</span></div>
+            <div class="result-badge">Confidence: <span>{{ confidence }}%</span></div>
+          </div>
+
+          <!-- Treatment Button -->
+          <button type="button" class="btn-treatment" onclick="showTreatment('{{ predicted_label }}')">
+            &#9874; View Treatment
+          </button>
+        </div>
+        {% endif %}
+      </form>
+    </div>
+
+    <!-- Treatment Modal -->
+    <div class="modal fade" id="treatmentModal" tabindex="-1" aria-labelledby="treatmentModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="treatmentModalLabel">Treatment Guide</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="treatmentBody">
+            <!-- Filled by JS -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-close-modal" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+      const treatments = {
+        "Bacterial Leaf Blight": {
+          severity: "high",
+          description: "A serious bacterial disease caused by <em>Xanthomonas oryzae</em> pv. <em>oryzae</em>. Causes wilting and yellowing of leaf edges.",
+          chemical: [
+            "Apply copper-based bactericides (e.g., Copper Oxychloride 50% WP) at 3 g/L water.",
+            "Use Streptomycin Sulfate + Tetracycline mixture (200 ppm) as foliar spray.",
+            "Spray at 10–15 day intervals during active infection."
+          ],
+          cultural: [
+            "Drain fields and reduce nitrogen fertilizer application.",
+            "Remove and destroy infected plant debris.",
+            "Use certified disease-free seeds and resistant varieties.",
+            "Avoid excessive irrigation and high plant density."
+          ],
+          prevention: "Seed treatment with Streptomycin (0.025%) before sowing. Maintain balanced NPK nutrition."
+        },
+        "Blast": {
+          severity: "high",
+          description: "Caused by the fungus <em>Magnaporthe oryzae</em>. One of the most destructive rice diseases worldwide affecting leaves, nodes, and panicles.",
+          chemical: [
+            "Apply Tricyclazole 75% WP at 0.6 g/L or Isoprothiolane 40% EC at 1.5 mL/L.",
+            "Use Propiconazole 25% EC at 1 mL/L as a curative spray.",
+            "Repeat spray after 10 days if disease persists."
+          ],
+          cultural: [
+            "Use blast-resistant rice varieties.",
+            "Avoid excess nitrogen fertilizer; use split dosing.",
+            "Maintain proper plant spacing for good air circulation.",
+            "Destroy crop residues after harvest."
+          ],
+          prevention: "Seed treatment with Carbendazim or Thiram. Monitor weather — blast is severe in cool, humid conditions."
+        },
+        "Brown Spot": {
+          severity: "medium",
+          description: "Caused by <em>Bipolaris oryzae</em>. Appears as brown oval spots on leaves, sheaths, and grains. Often indicates soil nutrient deficiency.",
+          chemical: [
+            "Spray Mancozeb 75% WP at 2.5 g/L or Propiconazole 25% EC at 1 mL/L.",
+            "Apply Edifenphos 50% EC at 1 mL/L as an alternative.",
+            "Two to three sprays at 10-day intervals are effective."
+          ],
+          cultural: [
+            "Correct soil nutrient deficiencies, especially potassium and silicon.",
+            "Use balanced fertilization and avoid water stress.",
+            "Use resistant or tolerant varieties.",
+            "Treat seeds before planting."
+          ],
+          prevention: "Seed treatment with hot water (52°C for 10 min) or fungicide. Maintain adequate soil fertility."
+        },
+        "Leaf Smut": {
+          severity: "low",
+          description: "Caused by <em>Entyloma oryzae</em>. Produces small, angular, black spots on leaves but rarely causes major yield loss.",
+          chemical: [
+            "Apply Propiconazole 25% EC at 1 mL/L water as foliar spray.",
+            "Mancozeb 75% WP at 2 g/L can reduce sporulation.",
+            "One or two sprays are usually sufficient."
+          ],
+          cultural: [
+            "Avoid excessive nitrogen application.",
+            "Remove heavily infected tillers if needed.",
+            "Maintain good field drainage."
+          ],
+          prevention: "Use certified clean seeds. Maintain proper crop nutrition and sanitation."
+        },
+        "Tungro": {
+          severity: "high",
+          description: "A viral disease transmitted by the green leafhopper (<em>Nephotettix virescens</em>). Causes yellow-orange discoloration and stunted growth.",
+          chemical: [
+            "No direct cure — control the leafhopper vector with insecticides.",
+            "Apply Imidacloprid 17.8% SL at 0.5 mL/L or Thiamethoxam 25% WG at 0.3 g/L.",
+            "Spray at transplanting and repeat as needed."
+          ],
+          cultural: [
+            "Use tungro-resistant varieties (e.g., IR36, IR64).",
+            "Synchronize planting in an area to avoid continuous vector populations.",
+            "Uproot and destroy infected plants early.",
+            "Avoid late planting when leafhopper populations are high."
+          ],
+          prevention: "Seed treatment with insecticides. Monitor and manage leafhopper populations throughout the season."
+        },
+        "Normal": {
+          severity: "low",
+          description: "No disease detected. The plant appears healthy.",
+          chemical: [],
+          cultural: [
+            "Continue regular monitoring of your crop.",
+            "Maintain balanced fertilization and proper irrigation.",
+            "Practice crop rotation and field sanitation."
+          ],
+          prevention: "Keep up good agricultural practices to prevent future disease outbreaks."
+        }
+      };
+
+      function showTreatment(diseaseName) {
+        // Try exact match, then case-insensitive
+        let data = treatments[diseaseName];
+        if (!data) {
+          const key = Object.keys(treatments).find(k => k.toLowerCase() === diseaseName.toLowerCase());
+          data = key ? treatments[key] : null;
+        }
+
+        const modalTitle = document.getElementById('treatmentModalLabel');
+        const body = document.getElementById('treatmentBody');
+
+        if (!data) {
+          modalTitle.textContent = diseaseName + ' — Treatment';
+          body.innerHTML = `<p class="text-warning">No specific treatment data found for "<strong>${diseaseName}</strong>". Please consult your local agricultural extension officer.</p>`;
+        } else {
+          const sevClass = { high: 'severity-high', medium: 'severity-medium', low: 'severity-low' }[data.severity] || 'severity-low';
+          const sevLabel = data.severity.charAt(0).toUpperCase() + data.severity.slice(1);
+
+          const chemHtml = data.chemical.length
+            ? `<ul>${data.chemical.map(c => `<li>${c}</li>`).join('')}</ul>`
+            : `<p>No chemical treatment required.</p>`;
+
+          body.innerHTML = `
+            <div class="treatment-section">
+              <h6>&#9679; Overview <span class="severity-badge ${sevClass}">${sevLabel} Severity</span></h6>
+              <p>${data.description}</p>
+            </div>
+            ${data.chemical.length ? `
+            <div class="treatment-section">
+              <h6>&#9670; Chemical Treatment</h6>
+              ${chemHtml}
+            </div>` : ''}
+            <div class="treatment-section">
+              <h6>&#9654; Cultural Management</h6>
+              <ul>${data.cultural.map(c => `<li>${c}</li>`).join('')}</ul>
+            </div>
+            <div class="treatment-section">
+              <h6>&#9650; Prevention</h6>
+              <p>${data.prevention}</p>
+            </div>
+          `;
+          modalTitle.innerHTML = `&#9874; ${diseaseName} — Treatment Guide`;
+        }
+
+        const modal = new bootstrap.Modal(document.getElementById('treatmentModal'));
+        modal.show();
+      }
+    </script>
+  </body>
+</html>
