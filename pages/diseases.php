@@ -1,5 +1,6 @@
 <?php
 require('../config.php');
+require('../utils/database.php');
 session_start();
 ?>
 <!DOCTYPE html>

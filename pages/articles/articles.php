@@ -5,7 +5,6 @@ session_start();
 
 $conn = initialize_database();
 
-// Filter by tag
 $filter_tag = trim($_GET['tag'] ?? '');
 $search     = trim($_GET['q']   ?? '');
 
@@ -20,7 +19,6 @@ if ($search !== '') {
 
 $articles_res = mysqli_query($conn, "SELECT * FROM article $where ORDER BY created_at DESC");
 
-// All tags for filter
 $tags_res = mysqli_query($conn, "SELECT DISTINCT tag FROM article WHERE tag IS NOT NULL AND tag != '' AND deleted_at IS NULL ORDER BY tag");
 $all_tags = [];
 while ($t = mysqli_fetch_assoc($tags_res)) $all_tags[] = $t['tag'];
@@ -47,41 +45,18 @@ while ($t = mysqli_fetch_assoc($tags_res)) $all_tags[] = $t['tag'];
 html{scroll-behavior:smooth}
 body{background:var(--white);color:var(--forest);font-family:var(--sans);font-weight:300;overflow-x:hidden}
 
-/* ── PAGE HERO ── */
-.page-hero{
-  background:var(--deep);padding:100px 8% 80px;position:relative;overflow:hidden;
-}
-.page-hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(160deg,rgba(107,158,111,.06) 0,rgba(107,158,111,.06) 1px,transparent 1px,transparent 60px);
-  pointer-events:none;
-}
-.page-hero::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(74,124,89,.2) 0%,transparent 70%);
-  pointer-events:none;
-}
+.page-hero{background:var(--deep);padding:100px 8% 80px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(160deg,rgba(107,158,111,.06) 0,rgba(107,158,111,.06) 1px,transparent 1px,transparent 60px);pointer-events:none}
+.page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(74,124,89,.2) 0%,transparent 70%);pointer-events:none}
 .page-hero-content{position:relative;z-index:1}
-.page-hero-label{
-  font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--lime);display:flex;align-items:center;gap:12px;margin-bottom:18px;
-}
+.page-hero-label{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .page-hero-label::before{content:'';display:block;width:28px;height:1px;background:var(--lime)}
-.page-hero-title{
-  font-family:var(--serif);font-size:clamp(2.4rem,5vw,4rem);font-weight:700;
-  color:var(--white);line-height:1.1;margin-bottom:16px;
-}
+.page-hero-title{font-family:var(--serif);font-size:clamp(2.4rem,5vw,4rem);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:16px}
 .page-hero-title em{font-style:italic;color:var(--lime)}
 .page-hero-sub{font-size:16px;line-height:1.75;color:rgba(250,253,247,.55);max-width:560px}
 
-/* ── MAIN LAYOUT ── */
-.articles-layout{
-  display:grid;grid-template-columns:1fr 280px;gap:48px;
-  max-width:1200px;margin:0 auto;padding:72px 8% 100px;
-}
+.articles-layout{display:grid;grid-template-columns:1fr 280px;gap:48px;max-width:1200px;margin:0 auto;padding:72px 8% 100px}
 
-/* ── SEARCH + FILTERS ── */
-.articles-main{}
 .filters-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:40px}
 .search-wrap{flex:1;min-width:200px;position:relative}
 .search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
@@ -91,33 +66,18 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
 .btn-search:hover{background:var(--forest)}
 .btn-clear{background:none;border:1px solid #d8e8d0;color:var(--muted);border-radius:22px;padding:10px 16px;font-family:var(--sans);font-size:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
 
-/* ── ARTICLE CARDS ── */
 .articles-grid{display:flex;flex-direction:column;gap:32px}
-.article-card{
-  display:grid;grid-template-columns:260px 1fr;gap:0;
-  border:1px solid #e0ead8;border-radius:10px;overflow:hidden;
-  background:var(--white);transition:box-shadow .25s,transform .25s;
-  text-decoration:none;color:inherit;
-}
+.article-card{display:grid;grid-template-columns:260px 1fr;gap:0;border:1px solid #e0ead8;border-radius:10px;overflow:hidden;background:var(--white);transition:box-shadow .25s,transform .25s;text-decoration:none;color:inherit;cursor:pointer}
 .article-card:hover{box-shadow:0 10px 40px rgba(27,58,45,.1);transform:translateY(-3px)}
 .article-card-img{width:100%;height:200px;object-fit:cover;display:block;background:#e8eed4}
 .article-card-img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#d4e6c3,#e8f0d8);display:flex;align-items:center;justify-content:center;font-size:2.5rem}
 .article-card-body{padding:28px 30px;display:flex;flex-direction:column;justify-content:space-between}
-.article-card-tag{
-  font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  padding:4px 12px;border-radius:100px;display:inline-block;margin-bottom:12px;
-  background:rgba(74,124,89,.1);color:var(--sage);border:1px solid rgba(74,124,89,.2);
-  width:fit-content;
-}
+.article-card-tag{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;display:inline-block;margin-bottom:12px;background:rgba(74,124,89,.1);color:var(--sage);border:1px solid rgba(74,124,89,.2);width:fit-content}
 .article-card-title{font-family:var(--serif);font-size:1.25rem;font-weight:400;color:var(--forest);line-height:1.35;margin-bottom:10px}
-.article-card-excerpt{font-size:13px;line-height:1.7;color:#5a7a60;margin-bottom:20px;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.article-card-excerpt{font-size:13px;line-height:1.7;color:#5a7a60;margin-bottom:20px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .article-card-footer{display:flex;align-items:center;justify-content:space-between}
 .article-card-date{font-size:11px;color:var(--muted);letter-spacing:.04em}
-.article-read-more{
-  font-size:12px;font-weight:500;color:var(--sage);
-  display:inline-flex;align-items:center;gap:5px;transition:gap .2s,color .2s;
-}
+.article-read-more{font-size:12px;font-weight:500;color:var(--sage);display:inline-flex;align-items:center;gap:5px;transition:gap .2s,color .2s}
 .article-card:hover .article-read-more{gap:9px;color:var(--forest)}
 .article-read-more svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
@@ -125,38 +85,24 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
 .no-articles svg{width:48px;height:48px;stroke:rgba(74,124,89,.3);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:14px}
 .no-articles p{font-size:15px}
 
-/* ── SIDEBAR ── */
 .articles-sidebar{display:flex;flex-direction:column;gap:28px}
 .sidebar-card{background:var(--white);border:1px solid #e0ead8;border-radius:10px;overflow:hidden}
 .sidebar-card-h{padding:16px 20px 12px;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid #e0ead8}
 .sidebar-card-b{padding:14px 20px 18px}
 .sidebar-tags{display:flex;flex-wrap:wrap;gap:7px}
-.sidebar-tag{
-  font-size:11px;padding:5px 13px;border-radius:100px;
-  background:rgba(74,124,89,.07);border:1px solid rgba(74,124,89,.15);
-  color:#5a7a60;text-decoration:none;transition:background .2s,color .2s;
-}
+.sidebar-tag{font-size:11px;padding:5px 13px;border-radius:100px;background:rgba(74,124,89,.07);border:1px solid rgba(74,124,89,.15);color:#5a7a60;text-decoration:none;transition:background .2s,color .2s}
 .sidebar-tag:hover,.sidebar-tag.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
-
-/* recent articles in sidebar */
 .recent-article{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0f5ec}
 .recent-article:last-child{border-bottom:none;padding-bottom:0}
 .recent-thumb{width:52px;height:44px;object-fit:cover;border-radius:5px;background:#e8eed4;flex-shrink:0}
 .recent-thumb-placeholder{width:52px;height:44px;border-radius:5px;background:linear-gradient(135deg,#d4e6c3,#e8f0d8);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
-.recent-info{}
 .recent-title{font-size:12px;font-weight:500;color:var(--forest);line-height:1.4;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .recent-date{font-size:10px;color:var(--muted)}
-.recent-article a{text-decoration:none;color:inherit}
-.recent-article a:hover .recent-title{color:var(--sage)}
 
-/* ── MODAL ── */
+/* MODAL */
 .overlay{position:fixed;inset:0;z-index:1000;background:rgba(18,42,32,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
 .overlay.open{opacity:1;pointer-events:all}
-.art-modal{
-  background:var(--white);border-radius:14px;width:100%;max-width:760px;
-  max-height:90vh;overflow-y:auto;
-  transform:translateY(24px) scale(.97);transition:transform .3s cubic-bezier(.34,1.2,.64,1);
-}
+.art-modal{background:var(--white);border-radius:14px;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;transform:translateY(24px) scale(.97);transition:transform .3s cubic-bezier(.34,1.2,.64,1)}
 .overlay.open .art-modal{transform:translateY(0) scale(1)}
 .modal-img{width:100%;max-height:320px;object-fit:cover;display:block;border-radius:14px 14px 0 0}
 .modal-body{padding:36px 40px 44px}
@@ -168,12 +114,7 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
 .modal-close:hover{background:var(--forest)}
 .modal-top{position:relative}
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .articles-layout{grid-template-columns:1fr}.articles-sidebar{display:none}
-  .article-card{grid-template-columns:1fr}
-  .article-card-img,.article-card-img-placeholder{height:180px}
-}
+@media(max-width:900px){.articles-layout{grid-template-columns:1fr}.articles-sidebar{display:none}.article-card{grid-template-columns:1fr}.article-card-img,.article-card-img-placeholder{height:180px}}
 @media(max-width:600px){.modal-body{padding:24px 22px 32px}}
 </style>
 </head>
@@ -181,7 +122,6 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
 
 <?php include('../../components/header_navigation_bar.php'); ?>
 
-<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-content">
     <p class="page-hero-label">Knowledge Hub</p>
@@ -190,13 +130,9 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
   </div>
 </section>
 
-<!-- MAIN CONTENT -->
 <div class="articles-layout">
-
-  <!-- LEFT: Articles -->
   <main class="articles-main">
 
-    <!-- Search + filter bar -->
     <form method="GET" class="filters-bar">
       <div class="search-wrap">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -208,17 +144,13 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
       <?php endif; ?>
     </form>
 
-    <!-- Active tag filter pill -->
     <?php if ($filter_tag): ?>
     <div style="margin-bottom:24px">
       <span style="font-size:12px;color:var(--muted)">Filtered by:</span>
-      <span style="font-size:12px;background:var(--sage);color:#fff;padding:4px 14px;border-radius:100px;margin-left:8px">
-        <?= htmlspecialchars($filter_tag) ?>
-      </span>
+      <span style="font-size:12px;background:var(--sage);color:#fff;padding:4px 14px;border-radius:100px;margin-left:8px"><?= htmlspecialchars($filter_tag) ?></span>
     </div>
     <?php endif; ?>
 
-    <!-- Article cards -->
     <div class="articles-grid">
     <?php if (mysqli_num_rows($articles_res) === 0): ?>
       <div class="no-articles">
@@ -230,17 +162,15 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
         $excerpt = htmlspecialchars(mb_substr(strip_tags($a['body']), 0, 180)) . (mb_strlen($a['body']) > 180 ? '…' : '');
         $date    = date('M j, Y', strtotime($a['created_at']));
         $img_src = !empty($a['image']) ? BASE_URL . '/public/images/articles/' . htmlspecialchars($a['image']) : '';
-        $body_escaped = htmlspecialchars($a['body'], ENT_QUOTES);
-        $title_escaped = htmlspecialchars($a['title'], ENT_QUOTES);
     ?>
-      <a class="article-card" href="javascript:void(0)"
-         onclick="openArticle(
-           '<?= $title_escaped ?>',
-           '<?= htmlspecialchars($a['tag'] ?? '', ENT_QUOTES) ?>',
-           '<?= addslashes($body_escaped) ?>',
-           '<?= $img_src ?>',
-           '<?= $date ?>'
-         )">
+      <!-- data-* attributes hold all values safely — no inline JS string escaping -->
+      <div class="article-card"
+           data-title="<?= htmlspecialchars($a['title'], ENT_QUOTES) ?>"
+           data-tag="<?= htmlspecialchars($a['tag'] ?? '', ENT_QUOTES) ?>"
+           data-body="<?= htmlspecialchars($a['body'], ENT_QUOTES) ?>"
+           data-img="<?= htmlspecialchars($img_src, ENT_QUOTES) ?>"
+           data-date="<?= htmlspecialchars($date, ENT_QUOTES) ?>"
+           onclick="openArticle(this)">
 
         <?php if ($img_src): ?>
           <img class="article-card-img" src="<?= $img_src ?>" alt="<?= htmlspecialchars($a['title']) ?>">
@@ -262,15 +192,12 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
             </span>
           </div>
         </div>
-      </a>
+      </div>
     <?php endwhile; endif; ?>
     </div>
   </main>
 
-  <!-- RIGHT: Sidebar -->
   <aside class="articles-sidebar">
-
-    <!-- Topics filter -->
     <?php if (!empty($all_tags)): ?>
     <div class="sidebar-card">
       <div class="sidebar-card-h">Browse Topics</div>
@@ -278,18 +205,15 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
         <div class="sidebar-tags">
           <a href="articles.php" class="sidebar-tag <?= $filter_tag==='' ? 'active' : '' ?>">All</a>
           <?php foreach ($all_tags as $t): ?>
-            <a href="?tag=<?= urlencode($t) ?>" class="sidebar-tag <?= $filter_tag===$t ? 'active' : '' ?>">
-              <?= htmlspecialchars($t) ?>
-            </a>
+            <a href="?tag=<?= urlencode($t) ?>" class="sidebar-tag <?= $filter_tag===$t ? 'active' : '' ?>"><?= htmlspecialchars($t) ?></a>
           <?php endforeach; ?>
         </div>
       </div>
     </div>
     <?php endif; ?>
 
-    <!-- Recent articles -->
     <?php
-    $recent_res = mysqli_query($conn, "SELECT id, title, image, created_at, tag FROM article WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT 5");
+    $recent_res = mysqli_query($conn, "SELECT id, title, image, created_at FROM article WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT 5");
     $recent_articles = [];
     while ($r = mysqli_fetch_assoc($recent_res)) $recent_articles[] = $r;
     ?>
@@ -298,7 +222,7 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
       <div class="sidebar-card-h">Recent Articles</div>
       <div class="sidebar-card-b">
         <?php foreach ($recent_articles as $r):
-          $r_img = !empty($r['image']) ? BASE_URL . '/public/images/articles/' . htmlspecialchars($r['image']) : '';
+          $r_img  = !empty($r['image']) ? BASE_URL . '/public/images/articles/' . htmlspecialchars($r['image']) : '';
           $r_date = date('M j, Y', strtotime($r['created_at']));
         ?>
         <div class="recent-article">
@@ -307,7 +231,7 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
           <?php else: ?>
             <div class="recent-thumb-placeholder">🌾</div>
           <?php endif; ?>
-          <div class="recent-info">
+          <div>
             <div class="recent-title"><?= htmlspecialchars($r['title']) ?></div>
             <div class="recent-date"><?= $r_date ?></div>
           </div>
@@ -317,7 +241,6 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
     </div>
     <?php endif; ?>
 
-    <!-- Tips card -->
     <div class="sidebar-card">
       <div class="sidebar-card-h">Quick Tips</div>
       <div class="sidebar-card-b" style="display:flex;flex-direction:column;gap:14px">
@@ -336,7 +259,6 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
         <?php endforeach; ?>
       </div>
     </div>
-
   </aside>
 </div>
 
@@ -359,7 +281,14 @@ body{background:var(--white);color:var(--forest);font-family:var(--sans);font-we
 <?php include('../../components/footer.php'); ?>
 
 <script>
-function openArticle(title, tag, body, img, date) {
+// Read from data-* attributes — handles quotes, newlines, special chars safely
+function openArticle(card) {
+  const title = card.dataset.title;
+  const tag   = card.dataset.tag;
+  const body  = card.dataset.body;
+  const img   = card.dataset.img;
+  const date  = card.dataset.date;
+
   document.getElementById('modal-title').textContent   = title;
   document.getElementById('modal-date').textContent    = date;
   document.getElementById('modal-content').textContent = body;
